@@ -62,7 +62,7 @@
 						   VerticalAlignment="Center"
 						   Margin="5"
 					   />
-				<RelativePanel Grid.Row="1" Grid.Column="3" Margin="12,5">
+				<RelativePanel Grid.Row="1" Grid.Column="3" Margin="12,5,12,7">
 					<TextBlock Name="Filter"
 							   Text="Filter"
 							   FontStyle=""

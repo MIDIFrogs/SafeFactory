@@ -8,5 +8,25 @@
         x:Class="SafeFactory.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
         Title="SafeFactory">
-        <views:MainView />
+	<DockPanel>
+		<!-- Верхняя менюшка -->
+		<Menu DockPanel.Dock="Top">
+			<MenuItem Header="_File">
+				<MenuItem Header="_Exit" Command="{Binding ExitCommand}"/>
+			</MenuItem>
+		</Menu>
+		<StackPanel Orientation="Horizontal" DockPanel.Dock="Top" HorizontalAlignment="Right">
+			<Button Width="20" Height="20">
+				<TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE921;"/>
+			</Button>
+			<Button Width="20" Height="20">
+				<TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE923;"/>
+			</Button>
+			<Button Width="20" Height="20">
+				<TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE8BB;"/>
+			</Button>
+		</StackPanel>
+		<!-- Основное содержимое окна -->
+		<views:MainView />
+	</DockPanel>
 </Window>

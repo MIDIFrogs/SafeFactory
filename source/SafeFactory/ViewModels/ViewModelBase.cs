@@ -1,7 +1,9 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using ReactiveUI;
 
-namespace SafeFactory.ViewModels;
-
-public class ViewModelBase : ObservableObject
+namespace SafeFactory.ViewModels
 {
+    public class ViewModelBase : ReactiveObject
+    {
+        // Дополнительные общие свойства и методы для ViewModel
+    }
 }

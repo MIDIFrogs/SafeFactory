@@ -1,0 +1,107 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="SafeFactory.Views.HomeView">
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="2*" />
+			<ColumnDefinition Width="4*" />
+		</Grid.ColumnDefinitions>
+		<Grid Grid.Column="0">
+			<Button Command=""
+					Width="200" 
+					Height="60" 
+					CornerRadius="50" 
+					HorizontalAlignment="Left"
+					VerticalAlignment="Top"
+					Margin="30, 60"
+					>
+				<TextBlock Text="Open" 
+						   FontStyle="" 
+						   HorizontalAlignment="Center" 
+						   VerticalAlignment="Center"/>
+			</Button>
+		</Grid>
+		<Grid Grid.Column="1">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="1*"/>
+				<RowDefinition Height="1*"/>
+				<RowDefinition Height="8*"/>
+			</Grid.RowDefinitions>
+			<Grid Grid.Row="1">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="1*" />
+					<ColumnDefinition Width="1*" />
+					<ColumnDefinition Width="1*" />
+					<ColumnDefinition Width="1.5*" />
+					
+				</Grid.ColumnDefinitions>
+				<TextBlock Text="Name"
+						   Grid.Row="1"
+						   Grid.Column="0"
+						   FontStyle=""
+						   HorizontalAlignment="Left"
+						   VerticalAlignment="Center"
+						   Margin="5"
+					   />
+				<TextBlock Text="Recent"
+						   Grid.Row="1"
+						   Grid.Column="1"
+						   FontStyle=""
+						   HorizontalAlignment="Center"
+						   VerticalAlignment="Center"
+						   Margin="5"
+					   />
+				<TextBlock Text="Duration"
+						   Grid.Row="1"
+						   Grid.Column="2"
+						   FontStyle=""
+						   HorizontalAlignment="Center"
+						   VerticalAlignment="Center"
+						   Margin="5"
+					   />
+				<RelativePanel Grid.Row="1" Grid.Column="3" Margin="12,5">
+					<TextBlock Name="Filter"
+							   Text="Filter"
+							   FontStyle=""
+							   RelativePanel.AlignVerticalCenterWithPanel="True"
+							   Margin="0,0,2,0"
+						   />
+					<TextBox Name="FilerSpace"
+							 Background=""
+							 MaxLength="40"
+							 CornerRadius="16"
+							 RelativePanel.RightOf="Filter"
+							 RelativePanel.AlignVerticalCenterWithPanel="True"
+							 RelativePanel.AlignRightWithPanel="True"
+						   />
+				</RelativePanel>
+					
+			</Grid>
+			<Grid Grid.Row="2">
+				<ListBox CornerRadius="10" Margin="0,0,12,1">
+					<ListBox.ItemTemplate>
+						<DataTemplate>
+							<Grid>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="*"/>
+									<ColumnDefinition Width="*"/>
+									<ColumnDefinition Width="*"/>
+									<ColumnDefinition Width="*"/>
+								</Grid.ColumnDefinitions>
+								<Image Source="" Grid.Column="0" Width="208" Height="117"/>
+								<TextBlock Grid.Column="1" Text="{Binding}" FontStyle=""/>
+								<TextBlock Grid.Column="2" Text="{Binding}" FontStyle=""/>
+								<TextBlock Grid.Column="3" Text="{Binding}" FontStyle=""/>
+							</Grid>
+						</DataTemplate>
+					</ListBox.ItemTemplate>
+				</ListBox>
+			</Grid>
+		</Grid>
+		
+	</Grid>
+	
+</UserControl>

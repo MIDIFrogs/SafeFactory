@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:views="clr-namespace:SafeFactory.Views"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+		WindowState="Maximized"
         x:Class="SafeFactory.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
         Title="SafeFactory">
@@ -12,20 +13,11 @@
 		<!-- Верхняя менюшка -->
 		<Menu DockPanel.Dock="Top">
 			<MenuItem Header="_File">
+				<MenuItem Header="_Import" Command="{Binding ExitCommand}"/>
+				<MenuItem Header="_Export" Command="{Binding ExitCommand}"/>
 				<MenuItem Header="_Exit" Command="{Binding ExitCommand}"/>
 			</MenuItem>
 		</Menu>
-		<StackPanel Orientation="Horizontal" DockPanel.Dock="Top" HorizontalAlignment="Right">
-			<Button Width="20" Height="20">
-				<TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE921;"/>
-			</Button>
-			<Button Width="20" Height="20">
-				<TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE923;"/>
-			</Button>
-			<Button Width="20" Height="20">
-				<TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE8BB;"/>
-			</Button>
-		</StackPanel>
 		<!-- Основное содержимое окна -->
 		<views:MainView />
 	</DockPanel>

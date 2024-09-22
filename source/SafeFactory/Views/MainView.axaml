@@ -15,7 +15,7 @@
     <vm:MainViewModel />
   </Design.DataContext>
 	<DockPanel>
-		<!-- Верхняя менюшка -->
+		<!-- Р’РµСЂС…РЅСЏСЏ РјРµРЅСЋС€РєР° -->
 		<Menu DockPanel.Dock="Top">
 			<MenuItem Header="_File">
 				<MenuItem Header="_Import" Command="{Binding ExitCommand}"/>
@@ -23,8 +23,8 @@
 				<MenuItem Header="_Exit" Command="{Binding ExitCommand}"/>
 			</MenuItem>
 		</Menu>
-		<!-- Основное содержимое окна -->
-		<TabControl ItemsSource="{Binding Tabs}">
+		<!-- РћСЃРЅРѕРІРЅРѕРµ СЃРѕРґРµСЂР¶РёРјРѕРµ РѕРєРЅР° -->
+		<TabControl ItemsSource="{Binding Tabs}" SelectedIndex="{Binding SelectedTab}">
 			<TabControl.ItemTemplate>
 				<DataTemplate DataType="{x:Type controlvm:TabInfo}">
 					<TabItem Header="{Binding Header}"/>

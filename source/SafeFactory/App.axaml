@@ -6,5 +6,8 @@
 
     <Application.Styles>
 		<FluentTheme/>
+		<Style Selector="TextBlock.pad">
+			<Setter Property="Margin" Value="5"/>
+		</Style>
 	</Application.Styles>
 </Application>

@@ -1,12 +1,24 @@
 ﻿// Copyright 2024 (c) MIDIFrogs (contact https://github.com/MIDIFrogs)
 // Distributed under AGPL v.3.0 license. See LICENSE.md file in the project root for more information
 using System;
+using Avalonia.Media.Imaging;
+using System.IO;
 using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Formats.Png;
+using SixLabors.ImageSharp.PixelFormats;
 
 namespace SafeFactory
 {
     public static class Geometry
     {
+        public static Bitmap ConvertToBitmap(this Image<Rgba32> preview)
+        {
+            using var stream = new MemoryStream();
+            preview.Save(stream, new PngEncoder());
+            stream.Position = 0;
+            return new Bitmap(stream);
+        }
+
         public static bool IntersectsWith(this Rectangle rect, Point[] polygon)
         {
             // Check if any edge of the polygon intersects with the rectangle

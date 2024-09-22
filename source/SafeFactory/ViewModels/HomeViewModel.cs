@@ -10,14 +10,23 @@ using System.Linq;
 using System.Reactive;
 using System.Text;
 using System.Threading.Tasks;
+using Avalonia.Controls;
+using MsBox.Avalonia;
+using System.Xml.Linq;
+using System.IO;
+using Newtonsoft.Json;
+using SafeFactory.VideoCapture;
+using Avalonia.Media.Imaging;
+using SixLabors.ImageSharp.Formats.Png;
+using CommunityToolkit.Mvvm.ComponentModel;
+using Avalonia.Interactivity;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.PixelFormats;
 
 namespace SafeFactory.ViewModels
 {
-    internal class HomeViewModel
+    internal partial class HomeViewModel : ViewModelBase
     {
-        // HACK
-        private static RamCachedWebImageLoader loader = new RamCachedWebImageLoader();
-
         private MainViewModel mainViewModel;
 
         public HomeViewModel() { }
@@ -25,16 +34,59 @@ namespace SafeFactory.ViewModels
         public HomeViewModel(MainViewModel mvm)
         {
             mainViewModel = mvm;
+            LoadRecentProject();
         }
 
-        // Unit это типа void
-        public ReactiveCommand<Unit, Unit> ChooseProject { get; set; }
+        private void LoadRecentProject()
+        {
+            if (File.Exists("History.json"))
+            {
+                string s = File.ReadAllText("History.json");
+                RecentProjects = JsonConvert.DeserializeObject<ObservableCollection<RecentProjectInfo>>(s);
+            }
+            else
+            {
+                RecentProjects = [];
+            }
+        }
 
-        public ObservableCollection<RecentProjectInfo> RecentProjects { get; set; } = [
-            // HACK for preview.
-            new(loader.ProvideImageAsync("https://i.pinimg.com/736x/c0/78/83/c078830e530f6a89799824e51b2f24a4.jpg").Result, "Sample", DateTime.Now, new(1, 2, 3), "./info.json"),
-            new(loader.ProvideImageAsync("https://i.pinimg.com/736x/c0/78/83/c078830e530f6a89799824e51b2f24a4.jpg").Result, "Sample 2", new(2020, 10, 15), new(4, 3, 2), "./info.json")
-            ];
+        public ObservableCollection<RecentProjectInfo> RecentProjects { get; set; }
+
+        public async void SelectProject()
+        {
+            var file = await new OpenFileDialog()
+            {
+                Filters = [new() { Name = "Project info file (JSON)", Extensions = ["json"] }],
+                Title = "Select a file to open.",
+            }.ShowAsync(new Window());
+            OpenProject(file[0]);
+        }
+
+        public async void CreateProject()
+        {
+            var file = await new OpenFileDialog()
+            {
+                Title = "Select a video to open.",
+                Filters = [new() { Name = "Video file (MPEG)", Extensions = ["mp4", "avi"] }],
+            }.ShowAsync(new Window());
+            var projectFile = await new SaveFileDialog()
+            {
+                DefaultExtension = "json",
+                Directory = Environment.GetFolderPath(Environment.SpecialFolder.Personal),
+                InitialFileName = "My Project",
+                Filters = [new() { Name = "Project info file (JSON)", Extensions = ["json"] }],
+                Title = "Select a location to save the file.",
+            }.ShowAsync(new Window());
+            string projName = Path.GetFileNameWithoutExtension(projectFile);
+            var (preview, duration) = FrameSpliter.AnalyzeVideo(file[0]);
+            string previewPath = Path.Combine(new FileInfo(projectFile).Directory.FullName, "preview.png");
+            await preview.SaveAsync(File.Create(previewPath), new PngEncoder());
+            var info = new ProjectInfo(projName, previewPath, file[0], DateTime.Now, duration, projectFile);
+            File.WriteAllText(projectFile, JsonConvert.SerializeObject(info));
+            RecentProjects.Add(new(previewPath, info.Name, DateTime.Now, duration, projectFile));
+            SaveRecentProjects();
+            OpenProject(projectFile);
+        }
 
         internal void OpenProject(string projectPath)
         {
@@ -42,9 +94,23 @@ namespace SafeFactory.ViewModels
             {
                 return;
             }
+
             ProjectInfo info = ProjectInfo.Load(projectPath);
+            var recent = RecentProjects.FirstOrDefault(x => x.ProjectPath == projectPath);
+            if (recent == null)
+            {
+                var (preview, duration) = FrameSpliter.AnalyzeVideo(info.VideoPath);
+                RecentProjects.Add(recent = new(Path.Combine(info.ProjectPath, "preview.png"), info.Name, DateTime.Now, duration, projectPath));
+                SaveRecentProjects();
+            }
             mainViewModel.Tabs.Add(new TabInfo(info.Name, new ProjectView() { DataContext = new ProjectViewModel(info) }));
             mainViewModel.SelectedTab = mainViewModel.Tabs.Count - 1;
+        }
+
+        void SaveRecentProjects()
+        {
+            string s = JsonConvert.SerializeObject(RecentProjects, Formatting.Indented);
+            File.WriteAllText("History.json", s);
         }
     }
 }

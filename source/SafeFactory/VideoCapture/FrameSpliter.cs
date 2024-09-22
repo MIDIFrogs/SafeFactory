@@ -12,6 +12,29 @@ namespace SafeFactory.VideoCapture
 {
     public static class FrameSpliter
     {
+        public static (Image<Rgba32>? Preview, TimeSpan Duration) AnalyzeVideo(string videoPath)
+        {
+            if (videoPath == null || !File.Exists(videoPath))
+            {
+                return ThrowHelper.ThrowInvalidOperationException<(Image<Rgba32> Preview, TimeSpan Duration)>();
+            }
+
+            var capture = new OpenCvSharp.VideoCapture(videoPath);
+            Image<Rgba32>? preview = null;
+            TimeSpan duration = TimeSpan.FromSeconds(capture.FrameCount / capture.Fps);
+            if (capture.IsOpened())
+            {
+                var image = new Mat();
+                if (!capture.Read(image)) return (preview, duration);
+                if (image.Empty()) return (preview, duration);
+                using var stream = image.ToMemoryStream();
+                stream.Position = 0;
+                preview = Image.Load<Rgba32>(stream);
+            }
+
+            return (preview, duration);
+        }
+
         public static IReadOnlyCollection<Image<Rgba32>> Split(string videoPath, double fps)
         {
             if (videoPath == null || !File.Exists(videoPath))
@@ -37,9 +60,10 @@ namespace SafeFactory.VideoCapture
                     if (!video.Read(image)) break;
                     if (image.Empty()) break;
                     using var stream = image.ToMemoryStream();
+                    stream.Position = 0;
                     yield return Image.Load<Rgba32>(stream);
                 }
-            } 
+            }
         }
 
         private class Wrapper : IReadOnlyCollection<Image<Rgba32>>

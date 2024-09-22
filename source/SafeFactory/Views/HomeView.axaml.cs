@@ -23,4 +23,14 @@ public partial class HomeView : UserControl
     private void Binding(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
     {
     }
+
+    private void Button_Click_1(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+    {
+        (DataContext as HomeViewModel).SelectProject();
+    }
+
+    private void Button_Click_2(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+    {
+        (DataContext as HomeViewModel).CreateProject();
+    }
 }

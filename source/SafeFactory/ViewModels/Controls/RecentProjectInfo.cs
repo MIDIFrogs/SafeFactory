@@ -5,11 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Media;
+using Avalonia.Media.Imaging;
+using Newtonsoft.Json;
 
 namespace SafeFactory.ViewModels.Controls
 {
-    public record RecentProjectInfo(IImage? Preview, string ProjectName, DateTime LastOpen, TimeSpan Duration, string ProjectPath)
+    public record RecentProjectInfo(string PreviewPath, string ProjectName, DateTime LastOpen, TimeSpan Duration, string ProjectPath)
     {
+        public Bitmap? Preview { get; } = PreviewPath != null ? new Bitmap(PreviewPath) : null;
+
         public string LastOpenDate
         {
             get
@@ -22,12 +26,15 @@ namespace SafeFactory.ViewModels.Controls
                     {
                         return "Long time ago";
                     }
+
                     result.Append(delta.Days).Append("d. ");
                 }
+
                 if (delta.Hours > 0)
                 {
                     result.Append(delta.Hours).Append("h ");
                 }
+
                 if (delta.Minutes > 0)
                 {
                     result.Append(delta.Minutes).Append("m ");
@@ -38,5 +45,8 @@ namespace SafeFactory.ViewModels.Controls
                 return result.ToString();
             }
         }
+
+        public string DurationText => $"{Duration:H:mm:ss}";
+
     }
 }

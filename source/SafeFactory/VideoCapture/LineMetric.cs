@@ -26,6 +26,7 @@ namespace SafeFactory.VideoCapture
             do
             {
                 yield return new Point(x.X + step, y.Y + (int)(step * angel));
+                x.X += step;
             } while (x.X + step <= y.X);
         }
 

@@ -59,6 +59,7 @@ namespace SafeFactory.Projects
             };
             List<(ViolationReport, int)> activeViolations = [],
                 newViolations = [];
+            Directory.CreateDirectory(Path.Combine(Info.ProjectPath, "Reports"));
             foreach (var frame in split)
             {
                 i++;

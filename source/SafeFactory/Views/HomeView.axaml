@@ -16,19 +16,18 @@
 		<Grid Grid.Column="0">
 			<RelativePanel>
 				<Button Name="Create"
-						Command="{Binding }"
 						Width="200"
 						Height="60"
 						CornerRadius="50"
 						Margin="30, 60, 20, 10"
 						Background="#7123AE"
 						Content="Create project"
+						Click="Button_Click_2"
 						FontSize="20"
 						HorizontalContentAlignment="Center"
 						VerticalContentAlignment="Center"
 					/>
 				<Button Name="OpenProj"
-						Command="{Binding ChooseProject}"
 						Width="200"
 						Height="60"
 						CornerRadius="50"
@@ -37,6 +36,7 @@
 						Background="#7123AE"
 						Content="Open project"
 						FontSize="20"
+						Click="Button_Click_1"
 						HorizontalContentAlignment="Center"
 						VerticalContentAlignment="Center"
 					/>

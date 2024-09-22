@@ -36,7 +36,7 @@
 			<Grid Grid.Row="1">
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="*"/>
-					<ColumnDefinition Width="8*"/>
+					<ColumnDefinition Width="5.1*"/>
 				</Grid.ColumnDefinitions>
 				<Grid.RowDefinitions>
 					<RowDefinition Height="*"/>
@@ -45,51 +45,57 @@
 				</Grid.RowDefinitions>
 				<Button Command="{Binding }"
 						Grid.Column="0" Grid.Row="0"
-						Width="208" Height="117"
-						CornerRadius="10"
-						Background="#7123AE"
+						Width="100" Height="30"
+						CornerRadius="8"
+						Background="#5546c3"
 						Content="Error_1"
-						HorizontalContentAlignment="Stretch"
+						HorizontalContentAlignment="Center"
 						VerticalContentAlignment="Center"
 						Margin="5"/>
 				
 				<Button Command="{Binding }"
 						Grid.Column="0" Grid.Row="1"
-						Width="208" Height="117"
-						CornerRadius="10"
-						Background="#7123AE"
+						Width="100" Height="30"
+						CornerRadius="8"
+						Background="#5546c3"
 						Content="Error_2"
-						HorizontalContentAlignment="Stretch"
+						HorizontalContentAlignment="Center"
 						VerticalContentAlignment="Center"
 						Margin="5"/>
 				
 				<Button Command="{Binding }"
 						Grid.Column="0" Grid.Row="2"
-						Width="208" Height="117"
-						CornerRadius="10"
-						Background="#7123AE"
+						Width="100" Height="30"
+						CornerRadius="8"
+						Background="#5546c3"
 						Content="Error_3"
-						HorizontalContentAlignment="Stretch"
+						HorizontalContentAlignment="Center"
 						VerticalContentAlignment="Center"
 						Margin="5"/>
 				
-				<ProgressBar Background="7123AE"
+				<ProgressBar Name="DoorBar"
+							 Height="4"
+							 Background="#7123AE"
 							 Grid.Column="1" Grid.Row="0"
-							 CornerRadius="4"
+							 CornerRadius="2"
 							 HorizontalAlignment="Stretch"
 							 VerticalAlignment="Center"
 							 Margin="7"/>
 				
-				<ProgressBar Background="7123AE"
+				<ProgressBar Name="HelmetBar"
+							 Height="4"
+							 Background="#7123AE"
 							 Grid.Column="1" Grid.Row="1"
-							 CornerRadius="4"
+							 CornerRadius="2"
 							 HorizontalAlignment="Stretch"
 							 VerticalAlignment="Center"
 							 Margin="7"/>
 				
-				<ProgressBar Background="7123AE"
+				<ProgressBar Name="StepOverBar"
+							 Height="4"
+							 Background="#7123AE"
 							 Grid.Column="1" Grid.Row="2"
-							 CornerRadius="4"
+							 CornerRadius="2"
 							 HorizontalAlignment="Stretch"
 							 VerticalAlignment="Center"
 							 Margin="7"/>
@@ -104,7 +110,7 @@
 						   HorizontalAlignment="Stretch"
 						   Margin="10,2">
 				<Button Name="All"
-						Background="#7123AE"
+						Background="#5546c3"
 						CornerRadius="8"
 						RelativePanel.AlignVerticalCenterWithPanel="True"
 						RelativePanel.AlignLeftWithPanel="True"
@@ -146,7 +152,7 @@
 						HorizontalAlignment="Stretch"
 						Margin="7,2,7,1"
 						>
-					<ListBox Background="Transparent">
+					<ListBox Background="Transparent" ItemsSource="{Binding Violations}">
 						<ListBox.ItemTemplate>
 							<DataTemplate>
 								<Grid>
@@ -155,15 +161,17 @@
 										<ColumnDefinition Width="2*"/>
 									</Grid.ColumnDefinitions>
 									<Grid Grid.Column="0">
-										<Image Source="" Grid.Column="0" Width="208" Height="117"/>
+										<Image Source="{Binding CapturedBitmap}" Grid.Column="0" Width="208" Height="117"/>
 									</Grid>
 									<Grid Grid.Column="1">
 										<Grid.RowDefinitions>
-											<RowDefinition Height="0"/>
-											<RowDefinition Height="1"/>
+											<RowDefinition Height="*"/>
+											<RowDefinition Height="*"/>
+											<RowDefinition Height="*"/>
 										</Grid.RowDefinitions>
-										<TextBlock Text="{Binding}" Grid.Row="0"/>
-										<TextBlock  Text="{Binding}" Grid.Row="1"/>
+										<TextBlock Text="{Binding Type}" Grid.Row="0"/>
+										<TextBlock Text="{Binding BeginTimestamp}" Grid.Row="1"/>
+										<TextBlock Text="{Binding EndTimestamp}" Grid.Row="2"/>
 									</Grid>
 								</Grid>
 							</DataTemplate>

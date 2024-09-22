@@ -1,0 +1,116 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:SafeFactory.ViewModels"
+			 mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="SafeFactory.Views.HomeView">
+	<Design.DataContext>
+		<vm:HomeViewModel/>
+	</Design.DataContext>
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="2*" />
+			<ColumnDefinition Width="4*" />
+		</Grid.ColumnDefinitions>
+		<Grid Grid.Column="0">
+			<Button Command="{Binding ChooseProject}"
+					Width="200" 
+					Height="60" 
+					CornerRadius="50" 
+					HorizontalAlignment="Left"
+					VerticalAlignment="Top"
+					Margin="30, 60"
+					Content="Open"
+					Background="#7123AE"
+					Foreground="White"
+					HorizontalContentAlignment="Center"
+					VerticalContentAlignment="Center"
+					/>
+		</Grid>
+		<Grid Grid.Column="1">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="1*"/>
+				<RowDefinition Height="1*"/>
+				<RowDefinition Height="8*"/>
+			</Grid.RowDefinitions>
+			<Grid Grid.Row="1">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="1.5*" />
+					<ColumnDefinition Width="1*" />
+					<ColumnDefinition Width="1*" />
+					<ColumnDefinition Width="1*" />
+					
+				</Grid.ColumnDefinitions>
+				<RelativePanel Grid.Row="1" Grid.Column="0" Margin="12,5,12,7">
+					<TextBlock Name="Filter"
+							  
+							   Text="Filter"
+							   FontStyle="Italic"
+							   Opacity="0.5"
+						       Foreground="#D9D9D9"
+							   RelativePanel.AlignVerticalCenterWithPanel="True"
+							   Margin="0,0,2,0"
+						   />
+					<TextBox Name="FilterSpace"
+							 Background="#D9D9D9"
+							 Opacity="0.5"
+							 MaxLength="40"
+							 MaxWidth="252"
+							 CornerRadius="16"
+							 RelativePanel.RightOf="Filter"
+							 RelativePanel.AlignVerticalCenterWithPanel="True"
+							 RelativePanel.AlignRightWithPanel="True"
+						   />
+				</RelativePanel>
+				<TextBlock Text="Name"
+						   Grid.Row="1"
+						   Grid.Column="1"
+						   FontStyle=""
+						   HorizontalAlignment="Left"
+						   VerticalAlignment="Center"
+						   Margin="5"
+					   />
+				<TextBlock Text="Last open"
+						   Grid.Row="1"
+						   Grid.Column="2"
+						   FontStyle=""
+						   HorizontalAlignment="Center"
+						   VerticalAlignment="Center"
+						   Margin="5"
+					   />
+				<TextBlock Text="Duration"
+						   Grid.Row="1"
+						   Grid.Column="3"
+						   FontStyle=""
+						   HorizontalAlignment="Center"
+						   VerticalAlignment="Center"
+						   Margin="5"
+					   />
+					
+			</Grid>
+			<Grid Grid.Row="2">
+				<ListBox Name="RecentProjectsList" ItemsSource="{Binding RecentProjects}" CornerRadius="10" Margin="0,0,12,1" SelectionChanged="ListBox_SelectionChanged">
+					<ListBox.ItemTemplate>
+						<DataTemplate>
+							<Grid>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="Auto"/>
+									<ColumnDefinition Width="*"/>
+									<ColumnDefinition Width="*"/>
+									<ColumnDefinition Width="*"/>
+								</Grid.ColumnDefinitions>
+								<Image Source="{Binding Preview}" Grid.Column="0" Height="80"/>
+								<TextBlock Grid.Column="1" Classes="pad" Text="{Binding ProjectName}" FontStyle=""/>
+								<TextBlock Grid.Column="2" Classes="pad" Text="{Binding LastOpenDate}" FontStyle=""/>
+								<TextBlock Grid.Column="3" Classes="pad" Text="{Binding Duration}" FontStyle=""/>
+							</Grid>
+						</DataTemplate>
+					</ListBox.ItemTemplate>
+				</ListBox>
+			</Grid>
+		</Grid>
+		
+	</Grid>
+	
+</UserControl>

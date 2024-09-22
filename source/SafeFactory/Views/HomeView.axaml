@@ -14,19 +14,33 @@
 			<ColumnDefinition Width="4*" />
 		</Grid.ColumnDefinitions>
 		<Grid Grid.Column="0">
-			<Button Command="{Binding ChooseProject}"
-					Width="200" 
-					Height="60" 
-					CornerRadius="50" 
-					HorizontalAlignment="Left"
-					VerticalAlignment="Top"
-					Margin="30, 60"
-					Content="Open"
-					Background="#7123AE"
-					Foreground="White"
-					HorizontalContentAlignment="Center"
-					VerticalContentAlignment="Center"
+			<RelativePanel>
+				<Button Name="Create"
+						Command="{Binding }"
+						Width="200"
+						Height="60"
+						CornerRadius="50"
+						Margin="30, 60, 20, 10"
+						Background="#7123AE"
+						Content="Create project"
+						FontSize="20"
+						HorizontalContentAlignment="Center"
+						VerticalContentAlignment="Center"
 					/>
+				<Button Name="OpenProj"
+						Command="{Binding ChooseProject}"
+						Width="200"
+						Height="60"
+						CornerRadius="50"
+						RelativePanel.Below="Create"
+						Margin="30, 10, 20, 60"
+						Background="#7123AE"
+						Content="Open project"
+						FontSize="20"
+						HorizontalContentAlignment="Center"
+						VerticalContentAlignment="Center"
+					/>
+			</RelativePanel>
 		</Grid>
 		<Grid Grid.Column="1">
 			<Grid.RowDefinitions>
@@ -44,7 +58,6 @@
 				</Grid.ColumnDefinitions>
 				<RelativePanel Grid.Row="1" Grid.Column="0" Margin="12,5,12,7">
 					<TextBlock Name="Filter"
-							  
 							   Text="Filter"
 							   FontStyle="Italic"
 							   Opacity="0.5"
@@ -66,26 +79,23 @@
 				<TextBlock Text="Name"
 						   Grid.Row="1"
 						   Grid.Column="1"
-						   FontStyle=""
+						   Classes="pad"
 						   HorizontalAlignment="Left"
 						   VerticalAlignment="Center"
-						   Margin="5"
 					   />
 				<TextBlock Text="Last open"
 						   Grid.Row="1"
 						   Grid.Column="2"
-						   FontStyle=""
+						   Classes="pad"
 						   HorizontalAlignment="Center"
 						   VerticalAlignment="Center"
-						   Margin="5"
 					   />
 				<TextBlock Text="Duration"
 						   Grid.Row="1"
 						   Grid.Column="3"
-						   FontStyle=""
+						   Classes="pad"
 						   HorizontalAlignment="Center"
 						   VerticalAlignment="Center"
-						   Margin="5"
 					   />
 					
 			</Grid>
@@ -97,13 +107,33 @@
 								<Grid.ColumnDefinitions>
 									<ColumnDefinition Width="Auto"/>
 									<ColumnDefinition Width="*"/>
-									<ColumnDefinition Width="*"/>
+									<ColumnDefinition Width="1.2*"/>
 									<ColumnDefinition Width="*"/>
 								</Grid.ColumnDefinitions>
-								<Image Source="{Binding Preview}" Grid.Column="0" Height="80"/>
-								<TextBlock Grid.Column="1" Classes="pad" Text="{Binding ProjectName}" FontStyle=""/>
-								<TextBlock Grid.Column="2" Classes="pad" Text="{Binding LastOpenDate}" FontStyle=""/>
-								<TextBlock Grid.Column="3" Classes="pad" Text="{Binding Duration}" FontStyle=""/>
+								<Border Grid.Column="0" Height="80" ClipToBounds="True" CornerRadius="14">
+									<Image Source="{Binding Preview}" />
+								</Border>
+								<TextBlock Grid.Column="1"
+										   Classes="pad"
+										   Text="{Binding ProjectName}"
+										   VerticalAlignment="Top"
+										   HorizontalAlignment="Left"
+										   Margin="30, 12, 10, 5"
+										   />
+								<TextBlock Grid.Column="2"
+										   Classes="pad"
+										   Text="{Binding LastOpenDate}"
+										   VerticalAlignment="Top"
+										   HorizontalAlignment="Right"
+										   Margin="0, 12"
+										   />
+								<TextBlock Grid.Column="3"
+										   Classes="pad"
+										   Text="{Binding Duration}"
+										   VerticalAlignment="Top"
+										   HorizontalAlignment="Right"
+										   Margin="5, 12"
+										   />
 							</Grid>
 						</DataTemplate>
 					</ListBox.ItemTemplate>

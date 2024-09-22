@@ -36,13 +36,6 @@
 					<ContentControl Content="{Binding TargetPage}"/>
 				</DataTemplate>
 			</TabControl.ContentTemplate>
-			<!--<TabItem Header="Home">
-			<views:HomeView/>
-
-		</TabItem>
-		<TabItem Header="First project">
-			<views:ProjectView/>
-		</TabItem>-->
 		</TabControl>
 	</DockPanel>
 	

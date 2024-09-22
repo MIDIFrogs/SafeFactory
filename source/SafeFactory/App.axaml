@@ -1,21 +1,29 @@
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="SafeFactory.App"
-             RequestedThemeVariant="Default">
+             RequestedThemeVariant="Dark">
              <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
 	<Application.Resources>
 		<FontFamily x:Key="Libra">/Assets/LibraSans-Bold.ttf#Libra Sans</FontFamily>
 	</Application.Resources>
     <Application.Styles>
 		<FluentTheme/>
-		<Style Selector="TextBlock.pad">
-			<Setter Property="Margin" Value="5"/>
 		<Style Selector="Window">
 			<Setter Property="Background" Value="#222"/>
+		</Style>
+		<Style Selector="TextBlock.pad">
+			<Setter Property="FontSize" Value="16"/>
+			<Setter Property="Margin" Value="5"/>
 		</Style>
 		<Style Selector="TextBlock">
 			<Setter Property="FontFamily" Value="{StaticResource Libra}"/>
 			<Setter Property="Foreground" Value="White"/>
+		</Style>
+		<Style Selector="Button" >
+			<Setter Property="FontFamily" Value="{StaticResource Libra}"/>
+			<Setter Property="FontSize" Value="16"/>
+			<Setter Property="Foreground" Value="White"/>
+			<Setter Property="Margin" Value="5"/>
 		</Style>
 	</Application.Styles>
 	

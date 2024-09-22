@@ -15,7 +15,7 @@
 				<RowDefinition Height="3*"/>
 				<RowDefinition Height="*"/>
 			</Grid.RowDefinitions>
-			<!--Video player -->
+			<!--Video player-->
 			<Border Grid.Row="0"
 					Background="Gray"
 					MinWidth="360"
@@ -32,8 +32,68 @@
 								   VerticalAlignment="Stretch">
 					</lan:VideoView>
 			</Border>
-
-					<!--Errors timeline's bars Grid.Raw="1"-->
+			<!--Errors timeline's bars-->
+			<Grid Grid.Row="1">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="8*"/>
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="*"/>
+					<RowDefinition Height="*"/>
+					<RowDefinition Height="*"/>
+				</Grid.RowDefinitions>
+				<Button Command="{Binding }"
+						Grid.Column="0" Grid.Row="0"
+						Width="208" Height="117"
+						CornerRadius="10"
+						Background="#7123AE"
+						Content="Error_1"
+						HorizontalContentAlignment="Stretch"
+						VerticalContentAlignment="Center"
+						Margin="5"/>
+				
+				<Button Command="{Binding }"
+						Grid.Column="0" Grid.Row="1"
+						Width="208" Height="117"
+						CornerRadius="10"
+						Background="#7123AE"
+						Content="Error_2"
+						HorizontalContentAlignment="Stretch"
+						VerticalContentAlignment="Center"
+						Margin="5"/>
+				
+				<Button Command="{Binding }"
+						Grid.Column="0" Grid.Row="2"
+						Width="208" Height="117"
+						CornerRadius="10"
+						Background="#7123AE"
+						Content="Error_3"
+						HorizontalContentAlignment="Stretch"
+						VerticalContentAlignment="Center"
+						Margin="5"/>
+				
+				<ProgressBar Background="7123AE"
+							 Grid.Column="1" Grid.Row="0"
+							 CornerRadius="4"
+							 HorizontalAlignment="Stretch"
+							 VerticalAlignment="Center"
+							 Margin="7"/>
+				
+				<ProgressBar Background="7123AE"
+							 Grid.Column="1" Grid.Row="1"
+							 CornerRadius="4"
+							 HorizontalAlignment="Stretch"
+							 VerticalAlignment="Center"
+							 Margin="7"/>
+				
+				<ProgressBar Background="7123AE"
+							 Grid.Column="1" Grid.Row="2"
+							 CornerRadius="4"
+							 HorizontalAlignment="Stretch"
+							 VerticalAlignment="Center"
+							 Margin="7"/>
+			</Grid>
 		</Grid>
 		<Grid Grid.Column="1">
 			<Grid.RowDefinitions>
@@ -49,35 +109,34 @@
 						RelativePanel.AlignVerticalCenterWithPanel="True"
 						RelativePanel.AlignLeftWithPanel="True"
 						Margin="4"
-						>
-					<TextBlock Text="All" FontStyle="" Foreground="White"/>
+						Content="All">
 				</Button>
 				<Button Name="E1"
-						Background="#7123AE"
+						Opacity="0.5"
+						Foreground="#D9D9D9"
 						CornerRadius="8"
 						RelativePanel.RightOf="All"
 						RelativePanel.AlignVerticalCenterWithPanel="True"
 						Margin="4"
-						>
-					<TextBlock Text="Error_1" FontStyle="" Foreground="White"/>
+						Content="Error_1">
 				</Button>
 				<Button Name="E2"
-						Background="#7123AE"
+						Opacity="0.5"
+						Foreground="#D9D9D9"
 						CornerRadius="8"
 						RelativePanel.RightOf="E1"
 						RelativePanel.AlignVerticalCenterWithPanel="True"
 						Margin="4"
-						>
-					<TextBlock Text="Error_2" FontStyle="" Foreground="White"/>
+						Content="Error_2">
 				</Button>
 				<Button Name="E3"
-						Background="#7123AE"
+						Opacity="0.5"
+						Foreground="#D9D9D9"
 						CornerRadius="8"
 						RelativePanel.RightOf="E2"
 						RelativePanel.AlignVerticalCenterWithPanel="True"
 						Margin="4"
-						>
-					<TextBlock Text="Error_3" FontStyle="" Foreground="White"/>
+						Content="Error_3">
 				</Button>
 			</RelativePanel>
 			<Grid Grid.Row="1">

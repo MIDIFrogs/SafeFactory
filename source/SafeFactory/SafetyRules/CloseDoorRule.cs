@@ -19,7 +19,7 @@ namespace SafeFactory.SafetyRules
             bool botMoving = IsRobotMoving(context, options);
             if (botMoving && lastFrame.IsDoorOpened)
             {
-                return new ValidationResult("You shouldn't open the door if robot is online.", ["door"]);
+                return new ValidationResult("You shouldn't open the door if robot is online.", ["openedDoor"]);
             }
             return ValidationResult.Success;
         }

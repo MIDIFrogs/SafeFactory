@@ -3,6 +3,7 @@
 using System;
 using Compunet.YoloV8.Data;
 using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.PixelFormats;
 
 namespace SafeFactory.VideoCapture
 {
@@ -14,7 +15,7 @@ namespace SafeFactory.VideoCapture
     /// <param name="DetectedPoses">All poses detected on the frame.</param>
     /// <param name="DetectedBoxes">All boxes detected on the frame.</param>
     /// <param name="IsDoorOpened">Determines whether the door is opened.</param>
-    public record FrameInfo(Image Frame, TimeSpan Timestamp, YoloResult<Pose> DetectedPoses, YoloResult<Detection> DetectedBoxes, bool IsDoorOpened)
+    public record FrameInfo(Image<Rgba32> Frame, TimeSpan Timestamp, YoloResult<Pose> DetectedPoses, YoloResult<Detection> DetectedBoxes, bool IsDoorOpened)
     {
     }
 }

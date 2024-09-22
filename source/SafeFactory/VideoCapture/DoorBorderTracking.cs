@@ -3,6 +3,7 @@ using Emgu.CV.Features2D;
 using Emgu.CV.Structure;
 using Emgu.CV.Util;
 using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.PixelFormats;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -26,9 +27,13 @@ namespace SafeFactory.VideoCapture
             return keypoints;
         }
 
-        public static bool IsDoorOpened(Image img, DoorBorder doorBorder)
+        public static bool IsDoorOpened(Image<Rgba32> img, RoomConfig config)
         {
-
+            LineMetric topMetric = LineMetric.Compute(config.Door.UpLeftPoint, config.Door.UpRightPoint, img);
+            if (!topMetric.Compare(config.TopDoorLine))
+                return false;
+            LineMetric bottomMetric = LineMetric.Compute(config.Door.DownLeftPoint, config.Door.DownRightPoint, img);
+            return bottomMetric.Compare(config.BottomDoorLine);
         }
     }
 }

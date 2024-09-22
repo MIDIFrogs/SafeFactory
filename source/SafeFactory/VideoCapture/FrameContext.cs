@@ -51,6 +51,7 @@ namespace SafeFactory.VideoCapture
         public FrameContext(int maxLastFrames = 3, bool stream = false)
         {
             StreamingStartTimestamp = DateTime.Now;
+            MaxLastFrames = maxLastFrames;
             StreamMode = stream;
         }
 

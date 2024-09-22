@@ -41,4 +41,13 @@
     <PackageReference Include="OpenCvSharp4.Windows" Version="4.10.0.20240616" />
     <PackageReference Include="YOLOv8.Gpu" Version="5.0.1" />
   </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Models\box.onnx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Models\pose.onnx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>

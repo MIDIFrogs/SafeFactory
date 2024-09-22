@@ -1,0 +1,117 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:lan="clr-namespace:LibVLCSharp.Avalonia;assembly=LibVLCSharp.Avalonia"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="SafeFactory.Views.ProjectView">
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="4*"/>
+			<ColumnDefinition Width="2*"/>
+		</Grid.ColumnDefinitions>
+		<Grid Grid.Column="0">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="3*"/>
+				<RowDefinition Height="*"/>
+			</Grid.RowDefinitions>
+			<!--Video player -->
+			<Border Grid.Row="0"
+					Background="Gray"
+					MinWidth="360"
+					MinHeight="240"
+					MaxWidth="1920"
+					MaxHeight="1080"
+					CornerRadius="10"
+					HorizontalAlignment="Stretch"
+					VerticalAlignment="Stretch"
+					Margin="20"
+					>
+					<lan:VideoView x:Name="VideoViewer"
+								   HorizontalAlignment="Stretch"
+								   VerticalAlignment="Stretch">
+					</lan:VideoView>
+			</Border>
+
+					<!--Errors timeline's bars Grid.Raw="1"-->
+		</Grid>
+		<Grid Grid.Column="1">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="48"/>
+				<RowDefinition Height="*"/>
+			</Grid.RowDefinitions>
+			<RelativePanel Grid.Row="0"
+						   HorizontalAlignment="Stretch"
+						   Margin="10,2">
+				<Button Name="All"
+						Background="#7123AE"
+						CornerRadius="8"
+						RelativePanel.AlignVerticalCenterWithPanel="True"
+						RelativePanel.AlignLeftWithPanel="True"
+						Margin="4"
+						>
+					<TextBlock Text="All" FontStyle="" Foreground="White"/>
+				</Button>
+				<Button Name="E1"
+						Background="#7123AE"
+						CornerRadius="8"
+						RelativePanel.RightOf="All"
+						RelativePanel.AlignVerticalCenterWithPanel="True"
+						Margin="4"
+						>
+					<TextBlock Text="Error_1" FontStyle="" Foreground="White"/>
+				</Button>
+				<Button Name="E2"
+						Background="#7123AE"
+						CornerRadius="8"
+						RelativePanel.RightOf="E1"
+						RelativePanel.AlignVerticalCenterWithPanel="True"
+						Margin="4"
+						>
+					<TextBlock Text="Error_2" FontStyle="" Foreground="White"/>
+				</Button>
+				<Button Name="E3"
+						Background="#7123AE"
+						CornerRadius="8"
+						RelativePanel.RightOf="E2"
+						RelativePanel.AlignVerticalCenterWithPanel="True"
+						Margin="4"
+						>
+					<TextBlock Text="Error_3" FontStyle="" Foreground="White"/>
+				</Button>
+			</RelativePanel>
+			<Grid Grid.Row="1">
+				<Border Background="gray" 
+						CornerRadius="20"
+						VerticalAlignment="Stretch"
+						HorizontalAlignment="Stretch"
+						Margin="7,2,7,1"
+						>
+					<ListBox Background="Transparent">
+						<ListBox.ItemTemplate>
+							<DataTemplate>
+								<Grid>
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="3*"/>
+										<ColumnDefinition Width="2*"/>
+									</Grid.ColumnDefinitions>
+									<Grid Grid.Column="0">
+										<Image Source="" Grid.Column="0" Width="208" Height="117"/>
+									</Grid>
+									<Grid Grid.Column="1">
+										<Grid.RowDefinitions>
+											<RowDefinition Height="0"/>
+											<RowDefinition Height="1"/>
+										</Grid.RowDefinitions>
+										<TextBlock Text="{Binding}" Grid.Row="0"/>
+										<TextBlock  Text="{Binding}" Grid.Row="1"/>
+									</Grid>
+								</Grid>
+							</DataTemplate>
+						</ListBox.ItemTemplate>
+					</ListBox>
+				</Border>
+			</Grid>
+		</Grid>
+	</Grid>
+</UserControl>

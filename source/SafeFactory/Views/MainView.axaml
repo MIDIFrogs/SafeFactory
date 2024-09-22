@@ -3,14 +3,47 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:SafeFactory.ViewModels"
+             xmlns:views="clr-namespace:SafeFactory.Views"
+			 xmlns:controlvm="clr-namespace:SafeFactory.ViewModels.Controls"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="SafeFactory.Views.MainView"
-             x:DataType="vm:MainViewModel">
+             x:DataType="vm:MainViewModel"
+			 
+			 >
   <Design.DataContext>
     <!-- This only sets the DataContext for the previewer in an IDE,
          to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
     <vm:MainViewModel />
   </Design.DataContext>
+	<DockPanel>
+		<!-- Р’РµСЂС…РЅСЏСЏ РјРµРЅСЋС€РєР° -->
+		<Menu DockPanel.Dock="Top">
+			<MenuItem Header="_File">
+				<MenuItem Header="_Import" Command="{Binding ExitCommand}"/>
+				<MenuItem Header="_Export" Command="{Binding ExitCommand}"/>
+				<MenuItem Header="_Exit" Command="{Binding ExitCommand}"/>
+			</MenuItem>
+		</Menu>
+		<!-- РћСЃРЅРѕРІРЅРѕРµ СЃРѕРґРµСЂР¶РёРјРѕРµ РѕРєРЅР° -->
+		<TabControl ItemsSource="{Binding Tabs}" SelectedIndex="{Binding SelectedTab}">
+			<TabControl.ItemTemplate>
+				<DataTemplate DataType="{x:Type controlvm:TabInfo}">
+					<TabItem Header="{Binding Header}"/>
+				</DataTemplate>
+			</TabControl.ItemTemplate>
+			<TabControl.ContentTemplate>
+				<DataTemplate DataType="{x:Type controlvm:TabInfo}">
+					<ContentControl Content="{Binding TargetPage}"/>
+				</DataTemplate>
+			</TabControl.ContentTemplate>
+			<!--<TabItem Header="Home">
+			<views:HomeView/>
 
-  <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+		</TabItem>
+		<TabItem Header="First project">
+			<views:ProjectView/>
+		</TabItem>-->
+		</TabControl>
+	</DockPanel>
+	
 </UserControl>

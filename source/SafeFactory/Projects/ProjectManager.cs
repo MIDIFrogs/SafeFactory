@@ -1,10 +1,11 @@
-﻿using System;
+﻿using SafeFactory.VideoCapture;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using SafeFactory.SafetyRules;
 
 namespace SafeFactory.Projects
 {
@@ -14,18 +15,20 @@ namespace SafeFactory.Projects
 
         public static ProjectManager Instance => _projectManager.Value;
 
-        public async Task<Project> CreateProjectAsync(string name, string path, string videoPath)
+        public RoomConfig RoomConfig { get; set; }
+
+        public async Task<Project> CreateProjectAsync(string name, string path, string videoPath, IProgress<(int, int)> progress)
         {
             var info = new ProjectInfo(name, string.Empty, videoPath, DateTime.Now, TimeSpan.Zero, path);
             var result = new Project(info);
-            await result.ProcessAsync();
+            await result.ProcessAsync(progress);
             return result;
         }
 
-        public async Task<Project> LoadProjectAsync(ProjectInfo info)
+        public async Task<Project> LoadProjectAsync(ProjectInfo info, IProgress<(int, int)> progressTracker)
         {
             var result = new Project(info);
-            await result.RestoreAsync();
+            await result.RestoreAsync(progressTracker);
             return result;
         }
 
@@ -48,6 +51,15 @@ namespace SafeFactory.Projects
                 {
                     yield return ProjectInfo.Load(infoPath);
                 }
+            }
+        }
+
+        public void LoadRoomConfig()
+        {
+            if (File.Exists("Room.json"))
+            {
+                string t = File.ReadAllText("Room.json");
+                RoomConfig = JsonConvert.DeserializeObject<RoomConfig>(t);
             }
         }
     }

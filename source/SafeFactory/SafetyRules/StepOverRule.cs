@@ -23,7 +23,7 @@ namespace SafeFactory.SafetyRules
                 return ValidationResult.Success;
             if (workers.Any(x => x.Bounds.IntersectsWith(options.KillZone)))
             {
-                return new ValidationResult("Workers shouldn't enter area while robot is in use.", ["step"]);
+                return new ValidationResult("Workers shouldn't enter area while robot is in use.", ["stepOver"]);
             }
 
             return ValidationResult.Success;

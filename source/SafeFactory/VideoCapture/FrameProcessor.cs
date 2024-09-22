@@ -13,7 +13,7 @@ namespace SafeFactory.VideoCapture
     /// <summary>
     /// Represents a service that performs asynchronous frame prediction.
     /// </summary>
-    public class FrameProcessor
+    public class FrameProcessor : IDisposable
     {
         private readonly YoloPredictor boxPredictor;
         private readonly YoloConfiguration configuration;
@@ -94,6 +94,13 @@ namespace SafeFactory.VideoCapture
         public async Task<YoloResult<Detection>> DetectAsync(Image image)
         {
             return await boxPredictor.DetectAsync(image, configuration);
+        }
+
+        /// <inheritdoc/>
+        public void Dispose()
+        {
+            boxPredictor.Dispose();
+            posePredictor.Dispose();
         }
 
         /// <summary>

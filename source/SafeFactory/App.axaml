@@ -10,6 +10,7 @@
 		<FluentTheme/>
 		<Style Selector="TextBlock.pad">
 			<Setter Property="Margin" Value="5"/>
+		</Style>
 		<Style Selector="Window">
 			<Setter Property="Background" Value="#222"/>
 		</Style>

@@ -20,7 +20,7 @@ namespace SafeFactory.ViewModels.Controls
                 {
                     if (delta.Days > 60)
                     {
-                        return "Long time ago.";
+                        return "Long time ago";
                     }
                     result.Append(delta.Days).Append("d. ");
                 }
@@ -33,8 +33,8 @@ namespace SafeFactory.ViewModels.Controls
                     result.Append(delta.Minutes).Append("m ");
                 }
                 if (result.Length == 0)
-                    return "Recently.";
-                result.Append("ago.");
+                    return "Recently";
+                result.Append("ago");
                 return result.ToString();
             }
         }

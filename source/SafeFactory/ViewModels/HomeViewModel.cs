@@ -20,10 +20,7 @@ namespace SafeFactory.ViewModels
 
         private MainViewModel mainViewModel;
 
-        public HomeViewModel()
-        {
-            
-        }
+        public HomeViewModel() { }
 
         public HomeViewModel(MainViewModel mvm)
         {

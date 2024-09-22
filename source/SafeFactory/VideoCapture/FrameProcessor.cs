@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Compunet.YoloV8;
 using Compunet.YoloV8.Data;
 using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.PixelFormats;
 
 namespace SafeFactory.VideoCapture
 {
@@ -111,13 +112,12 @@ namespace SafeFactory.VideoCapture
         /// <param name="frame">A frame to process.</param>
         /// <param name="timestamp">Timestamp to save into a frame.</param>
         /// <returns>Processed frame info to validate.</returns>
-        public async Task<FrameInfo> ProcessFrameAsync(Image frame, TimeSpan timestamp)
+        public async Task<FrameInfo> ProcessFrameAsync(Image<Rgba32> frame, TimeSpan timestamp, RoomConfig room)
         {
             var boxTask = DetectAsync(frame);
             var poseTask = PoseAsync(frame);
             await Task.WhenAll(boxTask, poseTask);
-            // TODO: check the door.
-            return new(frame, timestamp, poseTask.Result, boxTask.Result, false);
+            return new(frame, timestamp, poseTask.Result, boxTask.Result, DoorBorderTracking.IsDoorOpened(frame, room));
         }
     }
 }

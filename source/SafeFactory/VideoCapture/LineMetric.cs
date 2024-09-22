@@ -1,4 +1,5 @@
 ﻿using Avalonia.Controls;
+using CommunityToolkit.Diagnostics;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 using System;
@@ -45,8 +46,19 @@ namespace SafeFactory.VideoCapture
 
         public bool Compare(LineMetric other)
         {
-            if (Begin != other.Begin) 
-                // Throw
+            if (Begin != other.Begin || End != other.End)
+                return ThrowHelper.ThrowInvalidOperationException<bool>();
+            int dc = 0;
+            for (int i = 0; i < KeyColors.Length; i++)
+            {
+                var difference = (KeyColors[i].ToScaledVector4() - other.KeyColors[i].ToScaledVector4()).LengthSquared();
+                if (difference > 0.25f)
+                {
+                    dc++;
+                }
+            }
+
+            return dc < KeyColors.Length / 4;
         }
     }
 }

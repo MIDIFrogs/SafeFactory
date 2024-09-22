@@ -8,6 +8,7 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="SafeFactory.Views.MainView"
              x:DataType="vm:MainViewModel"
+			 
 			 >
   <Design.DataContext>
     <!-- This only sets the DataContext for the previewer in an IDE,

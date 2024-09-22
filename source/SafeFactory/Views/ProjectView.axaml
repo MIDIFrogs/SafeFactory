@@ -44,36 +44,40 @@
 						   HorizontalAlignment="Stretch"
 						   Margin="10,2">
 				<Button Name="All"
+						Background="#7123AE"
 						CornerRadius="8"
 						RelativePanel.AlignVerticalCenterWithPanel="True"
 						RelativePanel.AlignLeftWithPanel="True"
 						Margin="4"
 						>
-					<TextBlock Text="All" FontStyle=""/>
+					<TextBlock Text="All" FontStyle="" Foreground="White"/>
 				</Button>
 				<Button Name="E1"
+						Background="#7123AE"
 						CornerRadius="8"
 						RelativePanel.RightOf="All"
 						RelativePanel.AlignVerticalCenterWithPanel="True"
 						Margin="4"
 						>
-					<TextBlock Text="Error_1" FontStyle=""/>
+					<TextBlock Text="Error_1" FontStyle="" Foreground="White"/>
 				</Button>
 				<Button Name="E2"
+						Background="#7123AE"
 						CornerRadius="8"
 						RelativePanel.RightOf="E1"
 						RelativePanel.AlignVerticalCenterWithPanel="True"
 						Margin="4"
 						>
-					<TextBlock Text="Error_2" FontStyle=""/>
+					<TextBlock Text="Error_2" FontStyle="" Foreground="White"/>
 				</Button>
 				<Button Name="E3"
+						Background="#7123AE"
 						CornerRadius="8"
 						RelativePanel.RightOf="E2"
 						RelativePanel.AlignVerticalCenterWithPanel="True"
 						Margin="4"
 						>
-					<TextBlock Text="Error_3" FontStyle=""/>
+					<TextBlock Text="Error_3" FontStyle="" Foreground="White"/>
 				</Button>
 			</RelativePanel>
 			<Grid Grid.Row="1">

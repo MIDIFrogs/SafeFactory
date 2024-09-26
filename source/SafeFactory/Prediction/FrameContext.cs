@@ -1,10 +1,8 @@
 ﻿// Copyright 2024 (c) MIDIFrogs (contact https://github.com/MIDIFrogs)
 // Distributed under AGPL v.3.0 license. See LICENSE.md file in the project root for more information
-using System;
-using System.Collections.Generic;
 using CommunityToolkit.Diagnostics;
 
-namespace SafeFactory.VideoCapture
+namespace SafeFactory.Prediction
 {
     /// <summary>
     /// Represents a context to store last frames and video streaming context.

@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// Copyright 2024 (c) MIDIFrogs (contact https://github.com/MIDIFrogs)
+// Distributed under AGPL v.3.0 license. See LICENSE.md file in the project root for more information
 using Avalonia.Media.Imaging;
 using Newtonsoft.Json;
-using SixLabors.ImageSharp;
-using SixLabors.ImageSharp.PixelFormats;
+using SkiaSharp;
 
 namespace SafeFactory.Projects
 {
@@ -20,10 +15,10 @@ namespace SafeFactory.Projects
 
     public record ViolationReport(ReportType Type, TimeSpan BeginTimestamp, TimeSpan EndTimestamp)
     {
-        private Image<Rgba32> capturedFrame;
+        private SKBitmap capturedFrame;
 
         [JsonIgnore]
-        public Image<Rgba32> CapturedFrame
+        public SKBitmap CapturedFrame
         {
             get => capturedFrame;
             set

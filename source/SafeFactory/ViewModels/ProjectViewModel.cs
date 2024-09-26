@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// Copyright 2024 (c) MIDIFrogs (contact https://github.com/MIDIFrogs)
+// Distributed under AGPL v.3.0 license. See LICENSE.md file in the project root for more information
 using Avalonia.Controls;
 using Avalonia.Threading;
 using LibVLCSharp.Avalonia;
 using SafeFactory.Projects;
 using SafeFactory.VideoCapture;
 using SafeFactory.Views;
+using System.Diagnostics;
 
 namespace SafeFactory.ViewModels
 {

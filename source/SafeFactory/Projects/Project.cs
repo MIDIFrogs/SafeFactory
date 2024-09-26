@@ -7,10 +7,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Avalonia.Platform;
 using CommunityToolkit.Mvvm.ComponentModel;
-using Compunet.YoloV8;
 using Newtonsoft.Json;
+using SafeFactory.Prediction;
 using SafeFactory.SafetyRules;
 using SafeFactory.VideoCapture;
+using YoloDotNet;
 
 namespace SafeFactory.Projects
 {
@@ -30,16 +31,21 @@ namespace SafeFactory.Projects
         public async Task ProcessAsync(IProgress<(int, int)> progressTracker)
         {
             Violations.Clear();
-            var box = new YoloPredictor("Models/box.onnx");
-            var pose = new YoloPredictor("Models/pose.onnx");
-            var yoloConfig = new YoloConfiguration()
+            var box = new Yolo(new()
             {
-                Confidence = 0.25f,
-                SkipImageAutoOrient = true,
-            };
+                OnnxModel = "Models/box.onnx",
+                ModelType = YoloDotNet.Enums.ModelType.ObjectDetection,
+                Cuda = false,
+            });
+            var pose = new Yolo(new()
+            {
+                OnnxModel = "Models/pose.onnx",
+                ModelType = YoloDotNet.Enums.ModelType.PoseEstimation,
+                Cuda = false,
+            });
             double fps = 0.5;
-            using var processor = new FrameProcessor(box, pose, yoloConfig);
-            var split = FrameSpliter.Split(Info.VideoPath, 0.5);
+            using var processor = new FrameProcessor(box, pose);
+            var split = FrameSplitter.Split(Info.VideoPath, 0.5);
             int i = 0;
             TimeSpan timeFromStart = default;
             FrameContext context = new();
@@ -100,7 +106,7 @@ namespace SafeFactory.Projects
                 string s = JsonConvert.SerializeObject(v);
                 File.WriteAllText(Path.Combine(Info.ProjectPath, "Reports", $"{v.BeginTimestamp}_Report_{v.Type}.json"), s);
                 using var stream = File.Create(Path.Combine(Info.ProjectPath, "Reports", $"{v.BeginTimestamp}_Report_{v.Type}_Frame.png"));
-                await v.CapturedFrame.SaveAsync(stream, new SixLabors.ImageSharp.Formats.Png.PngEncoder());
+                v.CapturedFrame.Encode(stream, SkiaSharp.SKEncodedImageFormat.Png, 100);
             }
 
             Processed = true;

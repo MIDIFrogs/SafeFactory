@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SafeFactory", "SafeFactory\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SafeFactory.Desktop", "SafeFactory.Desktop\SafeFactory.Desktop.csproj", "{D3F744A9-F3EE-458C-8310-483187A16F00}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YoloDotNet", "YoloDotNet\YoloDotNet.csproj", "{2A1533D4-6F95-4600-A8C7-5A6C8DE93256}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{D3F744A9-F3EE-458C-8310-483187A16F00}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D3F744A9-F3EE-458C-8310-483187A16F00}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D3F744A9-F3EE-458C-8310-483187A16F00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A1533D4-6F95-4600-A8C7-5A6C8DE93256}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A1533D4-6F95-4600-A8C7-5A6C8DE93256}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A1533D4-6F95-4600-A8C7-5A6C8DE93256}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A1533D4-6F95-4600-A8C7-5A6C8DE93256}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

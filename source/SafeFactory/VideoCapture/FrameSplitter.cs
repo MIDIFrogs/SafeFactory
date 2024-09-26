@@ -1,26 +1,23 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using System.Runtime.CompilerServices;
+﻿// Copyright 2024 (c) MIDIFrogs (contact https://github.com/MIDIFrogs)
+// Distributed under AGPL v.3.0 license. See LICENSE.md file in the project root for more information
 using CommunityToolkit.Diagnostics;
 using OpenCvSharp;
-using SixLabors.ImageSharp;
-using SixLabors.ImageSharp.PixelFormats;
+using SkiaSharp;
+using System.Collections;
 
 namespace SafeFactory.VideoCapture
 {
-    public static class FrameSpliter
+    public static class FrameSplitter
     {
-        public static (Image<Rgba32>? Preview, TimeSpan Duration) AnalyzeVideo(string videoPath)
+        public static (SKBitmap? Preview, TimeSpan Duration) AnalyzeVideo(string videoPath)
         {
             if (videoPath == null || !File.Exists(videoPath))
             {
-                return ThrowHelper.ThrowInvalidOperationException<(Image<Rgba32> Preview, TimeSpan Duration)>();
+                return ThrowHelper.ThrowInvalidOperationException<(SKBitmap Preview, TimeSpan Duration)>();
             }
 
             var capture = new OpenCvSharp.VideoCapture(videoPath);
-            Image<Rgba32>? preview = null;
+            SKBitmap? preview = null;
             TimeSpan duration = TimeSpan.FromSeconds(capture.FrameCount / capture.Fps);
             if (capture.IsOpened())
             {
@@ -29,24 +26,24 @@ namespace SafeFactory.VideoCapture
                 if (image.Empty()) return (preview, duration);
                 using var stream = image.ToMemoryStream();
                 stream.Position = 0;
-                preview = Image.Load<Rgba32>(stream);
+                preview = SKBitmap.Decode(stream);
             }
 
             return (preview, duration);
         }
 
-        public static IReadOnlyCollection<Image<Rgba32>> Split(string videoPath, double fps)
+        public static IReadOnlyCollection<SKBitmap> Split(string videoPath, double fps)
         {
             if (videoPath == null || !File.Exists(videoPath))
             {
-                return ThrowHelper.ThrowInvalidOperationException<IReadOnlyCollection<Image<Rgba32>>>();
+                return ThrowHelper.ThrowInvalidOperationException<IReadOnlyCollection<SKBitmap>>();
             }
 
             var capture = new OpenCvSharp.VideoCapture(videoPath);
             return new Wrapper(SplitInternal(capture, fps), (int)(capture.FrameCount / (capture.Fps / fps)));
         }
 
-        private static IEnumerable<Image<Rgba32>> SplitInternal(OpenCvSharp.VideoCapture video, double fps)
+        private static IEnumerable<SKBitmap> SplitInternal(OpenCvSharp.VideoCapture video, double fps)
         {
             var image = new Mat();
             int i = 0;
@@ -61,16 +58,16 @@ namespace SafeFactory.VideoCapture
                     if (image.Empty()) break;
                     using var stream = image.ToMemoryStream();
                     stream.Position = 0;
-                    yield return Image.Load<Rgba32>(stream);
+                    yield return SKBitmap.Decode(stream);
                 }
             }
         }
 
-        private class Wrapper : IReadOnlyCollection<Image<Rgba32>>
+        private class Wrapper : IReadOnlyCollection<SKBitmap>
         {
-            private IEnumerable<Image<Rgba32>> images;
+            private IEnumerable<SKBitmap> images;
 
-            public Wrapper(IEnumerable<Image<Rgba32>> source, int count)
+            public Wrapper(IEnumerable<SKBitmap> source, int count)
             {
                 images = source;
                 Count = count;
@@ -78,7 +75,7 @@ namespace SafeFactory.VideoCapture
 
             public int Count { get; }
 
-            public IEnumerator<Image<Rgba32>> GetEnumerator()
+            public IEnumerator<SKBitmap> GetEnumerator()
             {
                 return images.GetEnumerator();
             }
@@ -90,4 +87,3 @@ namespace SafeFactory.VideoCapture
         }
     }
 }
-

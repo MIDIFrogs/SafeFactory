@@ -2,7 +2,7 @@
 // Distributed under AGPL v.3.0 license. See LICENSE.md file in the project root for more information
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using SafeFactory.VideoCapture;
+using SafeFactory.Prediction;
 
 namespace SafeFactory.SafetyRules
 {
@@ -28,7 +28,7 @@ namespace SafeFactory.SafetyRules
 
                 for (int j = 0; j < helmets.Count; j++)
                 {
-                    if (helmets[j].Bounds.IntersectsWith(workers[i].Bounds))
+                    if (helmets[j].BoundingBox.IntersectsWith(workers[i].BoundingBox))
                     {
                         workers.RemoveAt(i--);
                         helmets.RemoveAt(j--);

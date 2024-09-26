@@ -1,19 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Avalonia.Controls;
-using Avalonia.Media;
+﻿// Copyright 2024 (c) MIDIFrogs (contact https://github.com/MIDIFrogs)
+// Distributed under AGPL v.3.0 license. See LICENSE.md file in the project root for more information
 using Avalonia.Media.Imaging;
 using Newtonsoft.Json;
+using System.Text;
 
 namespace SafeFactory.ViewModels.Controls
 {
     public record RecentProjectInfo(string PreviewPath, string ProjectName, DateTime LastOpen, TimeSpan Duration, string ProjectPath)
     {
-        public Bitmap? Preview { get; } = PreviewPath != null ? new Bitmap(PreviewPath) : null;
+        [JsonIgnore]
+        public Bitmap? Preview { get; } = ExtractPreview(PreviewPath);
 
+        [JsonIgnore]
         public string LastOpenDate
         {
             get
@@ -46,7 +44,17 @@ namespace SafeFactory.ViewModels.Controls
             }
         }
 
-        public string DurationText => $"{Duration:H:mm:ss}";
+        [JsonIgnore]
+        public string DurationText => $"{Duration:hh\\:mm\\:ss}";
 
+        private static Bitmap? ExtractPreview(string previewPath)
+        {
+            if (!string.IsNullOrEmpty(previewPath) && File.Exists(previewPath))
+            {
+                return new Bitmap(previewPath);
+            }
+
+            return null;
+        }
     }
 }

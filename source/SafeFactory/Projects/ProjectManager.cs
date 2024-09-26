@@ -1,11 +1,11 @@
-﻿using SafeFactory.VideoCapture;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Threading.Tasks;
 using SafeFactory.SafetyRules;
+using SafeFactory.Prediction;
 
 namespace SafeFactory.Projects
 {

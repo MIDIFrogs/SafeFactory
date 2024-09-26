@@ -1,11 +1,9 @@
 ﻿// Copyright 2024 (c) MIDIFrogs (contact https://github.com/MIDIFrogs)
 // Distributed under AGPL v.3.0 license. See LICENSE.md file in the project root for more information
-using System;
-using Compunet.YoloV8.Data;
-using SixLabors.ImageSharp;
-using SixLabors.ImageSharp.PixelFormats;
+using SkiaSharp;
+using YoloDotNet.Models;
 
-namespace SafeFactory.VideoCapture
+namespace SafeFactory.Prediction
 {
     /// <summary>
     /// Represents an information about the frame to validate.
@@ -15,7 +13,7 @@ namespace SafeFactory.VideoCapture
     /// <param name="DetectedPoses">All poses detected on the frame.</param>
     /// <param name="DetectedBoxes">All boxes detected on the frame.</param>
     /// <param name="IsDoorOpened">Determines whether the door is opened.</param>
-    public record FrameInfo(Image<Rgba32> Frame, TimeSpan Timestamp, YoloResult<Pose> DetectedPoses, YoloResult<Detection> DetectedBoxes, bool IsDoorOpened)
+    public record FrameInfo(SKBitmap Frame, TimeSpan Timestamp, List<PoseEstimation> DetectedPoses, List<ObjectDetection> DetectedBoxes, bool IsDoorOpened)
     {
     }
 }

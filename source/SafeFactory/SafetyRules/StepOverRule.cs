@@ -2,7 +2,7 @@
 // Distributed under AGPL v.3.0 license. See LICENSE.md file in the project root for more information
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using SafeFactory.VideoCapture;
+using SafeFactory.Prediction;
 
 namespace SafeFactory.SafetyRules
 {
@@ -21,7 +21,7 @@ namespace SafeFactory.SafetyRules
             bool robotMoves = IsRobotMoving(context, options);
             if (!robotMoves)
                 return ValidationResult.Success;
-            if (workers.Any(x => x.Bounds.IntersectsWith(options.KillZone)))
+            if (workers.Any(x => x.BoundingBox.IntersectsWith(options.KillZone)))
             {
                 return new ValidationResult("Workers shouldn't enter area while robot is in use.", ["stepOver"]);
             }

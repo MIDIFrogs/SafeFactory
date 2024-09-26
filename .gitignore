@@ -453,3 +453,4 @@ $RECYCLE.BIN/
 !.vscode/launch.json
 !.vscode/extensions.json
 /source/SafeFactory/Models
+/source/YoloDotNet/*

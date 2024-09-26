@@ -60,6 +60,13 @@ namespace SafeFactory.Projects
             {
                 string t = File.ReadAllText("Room.json");
                 RoomConfig = JsonConvert.DeserializeObject<RoomConfig>(t);
+                RoomConfig.Door = new()
+                {
+                    UpLeft = new(33, 61),
+                    UpRight = new(236, 24),
+                    DownLeft = new(55, 503),
+                    DownRight = new(234, 375),
+                };
             }
         }
     }

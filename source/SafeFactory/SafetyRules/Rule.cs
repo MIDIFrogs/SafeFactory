@@ -20,7 +20,7 @@ namespace SafeFactory.SafetyRules
             return FrameProcessor.ComparePoses(GetRobotPose(previous, options), GetRobotPose(current, options)) > options.MovementThreshold;
         }
 
-        protected static PoseEstimation GetRobotPose(FrameInfo frame, RuleOptions options) => frame.DetectedPoses.Single(x => x.Label.Name == options.RobotTagName);
+        protected static PoseEstimation? GetRobotPose(FrameInfo frame, RuleOptions options) => frame.DetectedPoses.FirstOrDefault(x => x.Label.Name == options.RobotTagName);
 
         protected static IEnumerable<PoseEstimation> GetWorkerPoses(FrameInfo frame, RuleOptions options) => frame.DetectedPoses.Where(x => x.Label.Name == options.WorkerTagName);
 

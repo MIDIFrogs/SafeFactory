@@ -9,7 +9,7 @@ namespace SafeFactory.Prediction
     /// </summary>
     public class FrameContext
     {
-        private readonly LinkedList<FrameInfo> lastFrames;
+        private readonly LinkedList<FrameInfo> lastFrames = [];
         private int maxLastFrames;
 
         /// <summary>

@@ -36,6 +36,7 @@ namespace SafeFactory.Prediction
         /// <returns>A normalized average distance between the keypoints, ranging from 0 to 1.</returns>
         public static float ComparePoses(PoseEstimation pose1, PoseEstimation pose2)
         {
+            if (pose1 == null || pose2 == null) return 0;
             float sum = 0;
             float max = float.PositiveInfinity;
             float min = float.NegativeInfinity;

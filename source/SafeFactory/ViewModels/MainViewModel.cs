@@ -34,8 +34,7 @@ public partial class MainViewModel : ViewModelBase
         this.shutdown = shutdown;
         ExitCommand = ReactiveCommand.Create(() => Dispatcher.UIThread.Post(Close));
         Tabs = [new TabInfo("Home", new HomeView() { DataContext = new HomeViewModel(this) })];
-        string roomFile = File.ReadAllText("Room.json");
-        ProjectManager.Instance.RoomConfig = JsonConvert.DeserializeObject<RoomConfig>(roomFile);
+        ProjectManager.Instance.LoadRoomConfig();
     }
 
     public ObservableCollection<TabInfo> Tabs { get; }

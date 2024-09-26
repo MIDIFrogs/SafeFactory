@@ -46,13 +46,15 @@ namespace SafeFactory.VideoCapture
         private static IEnumerable<SKBitmap> SplitInternal(OpenCvSharp.VideoCapture video, double fps)
         {
             var image = new Mat();
-            int i = 0;
+            int i = 0, c = 0;
             double frameStep = video.Fps / fps;
+            int frames = (int)(video.FrameCount / frameStep);
             double nextFrame = 0;
-            while (video.IsOpened())
+            while (video.IsOpened() && c < frames)
             {
                 if (i++ > nextFrame)
                 {
+                    c++;
                     nextFrame += frameStep;
                     if (!video.Read(image)) break;
                     if (image.Empty()) break;

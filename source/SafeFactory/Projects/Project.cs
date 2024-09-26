@@ -65,7 +65,7 @@ namespace SafeFactory.Projects
             };
             List<(ViolationReport, int)> activeViolations = [],
                 newViolations = [];
-            Directory.CreateDirectory(Path.Combine(Info.ProjectPath, "Reports"));
+            Directory.CreateDirectory(Path.Combine(Path.GetDirectoryName(Info.ProjectPath), "Reports"));
             foreach (var frame in split)
             {
                 i++;
@@ -88,7 +88,7 @@ namespace SafeFactory.Projects
                     }
                     else
                     {
-                        newViolations.Add((activeViolations[i].Item1, activeViolations[i].Item2 + 1));
+                        newViolations.Add((activeViolations[firstHelmetViolation].Item1, activeViolations[firstHelmetViolation].Item2 + 1));
                     }
                 }
 
@@ -98,14 +98,15 @@ namespace SafeFactory.Projects
                 }
 
                 (activeViolations, newViolations) = (newViolations, activeViolations);
-                timeFromStart.Add(TimeSpan.FromSeconds(1 / fps));
+                timeFromStart = timeFromStart.Add(TimeSpan.FromSeconds(1 / fps));
             }
 
+            string dir = Path.GetDirectoryName(Info.ProjectPath)!;
             foreach (var v in Violations)
             {
                 string s = JsonConvert.SerializeObject(v);
-                File.WriteAllText(Path.Combine(Info.ProjectPath, "Reports", $"{v.BeginTimestamp}_Report_{v.Type}.json"), s);
-                using var stream = File.Create(Path.Combine(Info.ProjectPath, "Reports", $"{v.BeginTimestamp}_Report_{v.Type}_Frame.png"));
+                File.WriteAllText(Path.Combine(dir, "Reports", $"{v.BeginTimestamp}_Report_{v.Type}.json".Replace(':', '_')), s);
+                using var stream = File.Create(Path.Combine(dir, "Reports", $"{v.BeginTimestamp}_Report_{v.Type}_Frame.png".Replace(':', '_')));
                 v.CapturedFrame.Encode(stream, SkiaSharp.SKEncodedImageFormat.Png, 100);
             }
 
